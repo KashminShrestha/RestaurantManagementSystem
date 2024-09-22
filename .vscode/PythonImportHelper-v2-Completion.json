@@ -146,7 +146,31 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "IntegrityError",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -483,6 +507,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "restaurant.migrations.0003_alter_category_name",
+        "description": "restaurant.migrations.0003_alter_category_name",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('restaurant', '0002_alter_bill_total_amount_alter_menu_price_and_more'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='category',\n            name='name',\n            field=models.CharField(max_length=50, unique=True),\n        ),",
+        "detail": "restaurant.migrations.0003_alter_category_name",
+        "documentation": {}
+    },
+    {
         "label": "TableAdmin",
         "kind": 6,
         "importPath": "restaurant.admin",
@@ -586,7 +619,7 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Category(SharedModel):\n    name = models.CharField(max_length=50)\n    def __str__(self):\n        return self.name\n# Menu model\nclass Menu(SharedModel):\n    name = models.CharField(max_length=100)\n    price = models.DecimalField(\n        max_digits=5,\n        decimal_places=2,",
+        "peekOfCode": "class Category(SharedModel):\n    name = models.CharField(max_length=50, unique=True)\n    def __str__(self):\n        return self.name\n# Menu model\nclass Menu(SharedModel):\n    name = models.CharField(max_length=100)\n    price = models.DecimalField(\n        max_digits=5,\n        decimal_places=2,",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -676,7 +709,7 @@
         "kind": 6,
         "importPath": "restaurant.serializers",
         "description": "restaurant.serializers",
-        "peekOfCode": "class CategorySerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Category\n        fields = [\"id\", \"name\", \"created_at\", \"updated_at\"]\nclass MenuSerializer(serializers.ModelSerializer):\n    category = CategorySerializer()\n    class Meta:\n        model = Menu\n        fields = [\n            \"id\",",
+        "peekOfCode": "class CategorySerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Category\n        fields = [\"id\", \"name\", \"created_at\", \"updated_at\"]\n    def create(self, validated_data):\n        try:\n            return super().create(validated_data)\n        except IntegrityError:\n            raise serializers.ValidationError(\n                {\"error\": \"Category name must be unique.\"}",
         "detail": "restaurant.serializers",
         "documentation": {}
     },
@@ -685,7 +718,7 @@
         "kind": 6,
         "importPath": "restaurant.serializers",
         "description": "restaurant.serializers",
-        "peekOfCode": "class MenuSerializer(serializers.ModelSerializer):\n    category = CategorySerializer()\n    class Meta:\n        model = Menu\n        fields = [\n            \"id\",\n            \"name\",\n            \"price\",\n            \"category\",\n            \"created_at\",",
+        "peekOfCode": "class MenuSerializer(serializers.ModelSerializer):\n    category = CategorySerializer()  # Enable nested category creation\n    class Meta:\n        model = Menu\n        fields = [\n            \"id\",\n            \"name\",\n            \"price\",\n            \"category\",\n        ]",
         "detail": "restaurant.serializers",
         "documentation": {}
     },

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db import IntegrityError
 from .models import (
     Table,
     Category,
@@ -29,9 +30,25 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ["id", "name", "created_at", "updated_at"]
 
+    def create(self, validated_data):
+        try:
+            return super().create(validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError(
+                {"error": "Category name must be unique."}
+            )
+
+    def update(self, instance, validated_data):
+        try:
+            return super().update(instance, validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError(
+                {"error": "Category name must be unique."}
+            )
+
 
 class MenuSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    category = CategorySerializer()  # Enable nested category creation
 
     class Meta:
         model = Menu
@@ -40,9 +57,13 @@ class MenuSerializer(serializers.ModelSerializer):
             "name",
             "price",
             "category",
-            "created_at",
-            "updated_at",
         ]
+
+    def create(self, validated_data):
+        category_data = validated_data.pop("category")
+        category, created = Category.objects.get_or_create(**category_data)
+        menu = Menu.objects.create(category=category, **validated_data)
+        return menu
 
 
 class WaiterSerializer(serializers.ModelSerializer):
