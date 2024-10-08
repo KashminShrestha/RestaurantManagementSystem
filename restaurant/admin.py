@@ -52,8 +52,8 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ["table", "waiter"]
     list_filter = ["waiter"]
     search_fields = ["table__number", "waiter__name"]
+    filter_horizontal = ("menu_items",)  # Allows for multi-select in admin
     list_per_page = 20
-
 
 @admin.register(Bill)
 class BillAdmin(admin.ModelAdmin):

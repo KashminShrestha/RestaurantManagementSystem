@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 User = get_user_model()
-# Assuming User is the model name for Django's built-in User model
-
 
 # Create your models here.
 # Abstract base class for shared fields
@@ -17,23 +17,16 @@ class SharedModel(models.Model):
 
 
 # Table model
-class Table(SharedModel):
+class Table(models.Model):
     STATUS_CHOICES = [
         ("Available", "Available"),
         ("Reserved", "Reserved"),
         ("Occupied", "Occupied"),
     ]
 
-    number = models.IntegerField(
-        unique=True,
-        validators=[MinValueValidator(1)],  # Ensures the table number is positive
-    )
-    capacity = models.IntegerField(
-        validators=[MinValueValidator(1)]  # Ensures the capacity is positive
-    )
-    status = models.CharField(
-        max_length=50, choices=STATUS_CHOICES, default="Available"
-    )
+    number = models.IntegerField(unique=True, validators=[MinValueValidator(1)])
+    capacity = models.IntegerField(validators=[MinValueValidator(1)])
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="Available")
 
     def __str__(self):
         return f"Table {self.number}"
@@ -48,14 +41,20 @@ class Category(SharedModel):
 
 
 # Menu model
-class Menu(SharedModel):
+class Menu(models.Model):
     name = models.CharField(max_length=100)
-    price = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        validators=[MinValueValidator(0.01)],  # Ensures the price is positive
-    )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0.01)])
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+# MenuItem model
+class MenuItem(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='menu_items')
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0.01)])
 
     def __str__(self):
         return self.name
@@ -64,9 +63,7 @@ class Menu(SharedModel):
 # Waiter model
 class Waiter(SharedModel):
     name = models.CharField(max_length=100)
-    age = models.IntegerField(
-        validators=[MinValueValidator(1)]  # Ensures age is positive
-    )
+    age = models.IntegerField(validators=[MinValueValidator(1)])  # Ensures age is positive
 
     def __str__(self):
         return self.name
@@ -81,34 +78,53 @@ class Reception(SharedModel):
         return self.name
 
 
-# Order model
-class Order(SharedModel):
+class Order(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    menu_items = models.ManyToManyField("Menu")
+    menu_items = models.ManyToManyField(MenuItem, related_name="orders")  # Many-to-Many with MenuItem
+    timestamp = models.DateTimeField(auto_now_add=True)
     waiter = models.ForeignKey("Waiter", on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Order {self.id} at Table {self.table.number}"
 
+    def calculate_total(self):
+        # Summing up the price of all menu items in this order
+        return sum(item.price for item in self.menu_items.all())
 
-# Bill model
-class Bill(SharedModel):
-    order = models.OneToOneField("Order", on_delete=models.CASCADE)
-    total_amount = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        validators=[MinValueValidator(0.01)],  # Ensures the total amount is positive
-    )
+
+class Bill(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name="bill")
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     is_paid = models.BooleanField(default=False)
+
+    def calculate_total(self):
+        # Calculate total based on the prices of menu items in the related order
+        total = sum(item.price for item in self.order.menu_items.all())
+        self.total_amount = total
+        # Save the updated total_amount without triggering another save loop
+        super().save(update_fields=["total_amount"])
+
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If this is a new Bill instance (Bill not yet saved in DB)
+            super().save(*args, **kwargs)  # Save the Bill instance to create it in DB
+            self.calculate_total()  # Calculate total after the Bill is created
+        else:
+            super().save(*args, **kwargs)  # For updates, just save normally
 
     def pay_bill(self):
         self.is_paid = True
-        self.save()
-        if not Reservation.objects.filter(
-            table=self.order.table, is_confirmed=True
-        ).exists():
-            self.order.table.status = "Available"
-            self.order.table.save()
+        self.save(update_fields=["is_paid"])
+
+
+# Signal to auto-generate Bill when an Order is created
+@receiver(post_save, sender=Order)
+def create_bill_for_order(sender, instance, created, **kwargs):
+    if created:
+        # Create a bill immediately when the order is created
+        Bill.objects.create(order=instance)
+    else:
+        # Update the existing bill when the order is updated
+        instance.bill.calculate_total()
 
 
 # Reservation model

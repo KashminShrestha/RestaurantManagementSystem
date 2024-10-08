@@ -64,6 +64,16 @@ class BillViewSet(viewsets.ModelViewSet):
     queryset = Bill.objects.all()
     serializer_class = BillSerializer
 
+    def perform_create(self, serializer):
+        # Automatically create a bill when an order is created
+        bill = serializer.save()
+        bill.calculate_total()  # Ensure the total is calculated
+
+    def perform_update(self, serializer):
+        # Automatically update the bill when an order is updated
+        bill = serializer.save()
+        bill.calculate_total()  # Ensure the total is recalculated
+
 
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
