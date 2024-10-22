@@ -1,37 +1,11 @@
 [
     {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "os",
         "description": "os",
         "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "site",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "site",
-        "description": "site",
-        "detail": "site",
-        "documentation": {}
-    },
-    {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
         "documentation": {}
     },
     {
@@ -131,6 +105,23 @@
         "documentation": {}
     },
     {
+        "label": "django.core.validators",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.core.validators",
+        "description": "django.core.validators",
+        "detail": "django.core.validators",
+        "documentation": {}
+    },
+    {
+        "label": "MinValueValidator",
+        "importPath": "django.core.validators",
+        "description": "django.core.validators",
+        "isExtraImport": true,
+        "detail": "django.core.validators",
+        "documentation": {}
+    },
+    {
         "label": "django.db.models.deletion",
         "kind": 6,
         "isExtraImport": true,
@@ -180,20 +171,11 @@
         "documentation": {}
     },
     {
-        "label": "django.core.validators",
-        "kind": 6,
+        "label": "transaction",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "django.core.validators",
-        "description": "django.core.validators",
-        "detail": "django.core.validators",
-        "documentation": {}
-    },
-    {
-        "label": "MinValueValidator",
-        "importPath": "django.core.validators",
-        "description": "django.core.validators",
-        "isExtraImport": true,
-        "detail": "django.core.validators",
+        "detail": "django.db",
         "documentation": {}
     },
     {
@@ -210,6 +192,22 @@
         "description": "django.contrib.auth",
         "isExtraImport": true,
         "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "post_save",
+        "importPath": "django.db.models.signals",
+        "description": "django.db.models.signals",
+        "isExtraImport": true,
+        "detail": "django.db.models.signals",
+        "documentation": {}
+    },
+    {
+        "label": "receiver",
+        "importPath": "django.dispatch",
+        "description": "django.dispatch",
+        "isExtraImport": true,
+        "detail": "django.dispatch",
         "documentation": {}
     },
     {
@@ -293,84 +291,12 @@
         "documentation": {}
     },
     {
-        "label": "bin_dir",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"Scripts\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "base",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "base = bin_dir[: -len(\"Scripts\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "os.environ[\"PATH\"]",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "os.environ[\"VIRTUAL_ENV\"]",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "os.environ[\"VIRTUAL_ENV_PROMPT\"]",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "prev_length",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "sys.path[:]",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "sys.real_prefix",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.Scripts.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "sys.prefix",
-        "kind": 5,
-        "importPath": ".venv.Scripts.activate_this",
-        "description": ".venv.Scripts.activate_this",
-        "peekOfCode": "sys.prefix = base",
-        "detail": ".venv.Scripts.activate_this",
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
         "documentation": {}
     },
     {
@@ -574,10 +500,10 @@
     {
         "label": "Migration",
         "kind": 6,
-        "importPath": "restaurant.migrations.0002_alter_bill_total_amount_alter_menu_price_and_more",
-        "description": "restaurant.migrations.0002_alter_bill_total_amount_alter_menu_price_and_more",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('restaurant', '0001_initial'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='bill',\n            name='total_amount',\n            field=models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(0.01)]),\n        ),",
-        "detail": "restaurant.migrations.0002_alter_bill_total_amount_alter_menu_price_and_more",
+        "importPath": "restaurant.migrations.0002_alter_menu_price_alter_menuitem_price",
+        "description": "restaurant.migrations.0002_alter_menu_price_alter_menuitem_price",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('restaurant', '0001_initial'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='menu',\n            name='price',\n            field=models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(0.01)]),\n        ),",
+        "detail": "restaurant.migrations.0002_alter_menu_price_alter_menuitem_price",
         "documentation": {}
     },
     {
@@ -603,7 +529,16 @@
         "kind": 6,
         "importPath": "restaurant.admin",
         "description": "restaurant.admin",
-        "peekOfCode": "class MenuAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"price\", \"category\"]\n    list_filter = [\"category\"]\n    search_fields = [\"name\", \"category__name\"]\n    autocomplete_fields = [\"category\"]\n    list_per_page = 20\n@admin.register(Waiter)\nclass WaiterAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"age\"]\n    list_per_page = 20",
+        "peekOfCode": "class MenuAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"price\", \"category\"]\n    list_filter = [\"category\"]\n    search_fields = [\"name\", \"category__name\"]\n    autocomplete_fields = [\"category\"]\n    list_per_page = 20\n@admin.register(MenuItem)\nclass MenuItemAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"price\", \"get_category\"]\n    list_filter = [\"menu__category\"]",
+        "detail": "restaurant.admin",
+        "documentation": {}
+    },
+    {
+        "label": "MenuItemAdmin",
+        "kind": 6,
+        "importPath": "restaurant.admin",
+        "description": "restaurant.admin",
+        "peekOfCode": "class MenuItemAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"price\", \"get_category\"]\n    list_filter = [\"menu__category\"]\n    search_fields = [\"name\", \"menu__category__name\"]\n    autocomplete_fields = [\"menu\"]\n    list_per_page = 20\n    def get_category(self, obj):\n        return obj.menu.category.name\n    get_category.short_description = \"Category\"  # Changed from \"Name\" to \"Category\"\n@admin.register(Waiter)",
         "detail": "restaurant.admin",
         "documentation": {}
     },
@@ -612,7 +547,7 @@
         "kind": 6,
         "importPath": "restaurant.admin",
         "description": "restaurant.admin",
-        "peekOfCode": "class WaiterAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"age\"]\n    list_per_page = 20\n@admin.register(Reception)\nclass ReceptionAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"contact_number\"]\n    list_per_page = 20\n@admin.register(Order)\nclass OrderAdmin(admin.ModelAdmin):\n    list_display = [\"table\", \"waiter\"]",
+        "peekOfCode": "class WaiterAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"age\"]\n    list_per_page = 20\n@admin.register(Reception)\nclass ReceptionAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"contact_number\"]\n    list_per_page = 20\n@admin.register(Order)\nclass OrderAdmin(admin.ModelAdmin):\n    list_display = [\"table\", \"waiter\", \"total_price\"]  # Add total_price here",
         "detail": "restaurant.admin",
         "documentation": {}
     },
@@ -621,7 +556,7 @@
         "kind": 6,
         "importPath": "restaurant.admin",
         "description": "restaurant.admin",
-        "peekOfCode": "class ReceptionAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"contact_number\"]\n    list_per_page = 20\n@admin.register(Order)\nclass OrderAdmin(admin.ModelAdmin):\n    list_display = [\"table\", \"waiter\"]\n    list_filter = [\"waiter\"]\n    search_fields = [\"table__number\", \"waiter__name\"]\n    list_per_page = 20\n@admin.register(Bill)",
+        "peekOfCode": "class ReceptionAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"contact_number\"]\n    list_per_page = 20\n@admin.register(Order)\nclass OrderAdmin(admin.ModelAdmin):\n    list_display = [\"table\", \"waiter\", \"total_price\"]  # Add total_price here\n    list_filter = [\"waiter\"]\n    search_fields = [\"table__number\", \"waiter__name\"]\n    filter_horizontal = (\"menu_items\",)  # Allows for multi-select in admin\n    list_per_page = 20",
         "detail": "restaurant.admin",
         "documentation": {}
     },
@@ -630,7 +565,7 @@
         "kind": 6,
         "importPath": "restaurant.admin",
         "description": "restaurant.admin",
-        "peekOfCode": "class OrderAdmin(admin.ModelAdmin):\n    list_display = [\"table\", \"waiter\"]\n    list_filter = [\"waiter\"]\n    search_fields = [\"table__number\", \"waiter__name\"]\n    list_per_page = 20\n@admin.register(Bill)\nclass BillAdmin(admin.ModelAdmin):\n    list_display = [\"order\", \"total_amount\", \"is_paid\"]\n    list_filter = [\"is_paid\"]\n    search_fields = [\"order__id\"]",
+        "peekOfCode": "class OrderAdmin(admin.ModelAdmin):\n    list_display = [\"table\", \"waiter\", \"total_price\"]  # Add total_price here\n    list_filter = [\"waiter\"]\n    search_fields = [\"table__number\", \"waiter__name\"]\n    filter_horizontal = (\"menu_items\",)  # Allows for multi-select in admin\n    list_per_page = 20\n    # This method will call calculate_total and show it in the admin interface\n    def total_price(self, obj):\n        return obj.calculate_total()  # Call the Order model's method\n    total_price.short_description = \"Total Price\"",
         "detail": "restaurant.admin",
         "documentation": {}
     },
@@ -675,7 +610,7 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Table(SharedModel):\n    STATUS_CHOICES = [\n        (\"Available\", \"Available\"),\n        (\"Reserved\", \"Reserved\"),\n        (\"Occupied\", \"Occupied\"),\n    ]\n    number = models.IntegerField(\n        unique=True,\n        validators=[MinValueValidator(1)],  # Ensures the table number is positive\n    )",
+        "peekOfCode": "class Table(SharedModel):\n    STATUS_CHOICES = [\n        (\"Available\", \"Available\"),\n        (\"Reserved\", \"Reserved\"),\n        (\"Occupied\", \"Occupied\"),\n    ]\n    number = models.IntegerField(unique=True, validators=[MinValueValidator(1)])\n    capacity = models.IntegerField(validators=[MinValueValidator(1)])\n    status = models.CharField(\n        max_length=50, choices=STATUS_CHOICES, default=\"Available\"",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -684,7 +619,7 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Category(SharedModel):\n    name = models.CharField(max_length=50)\n    def __str__(self):\n        return self.name\n# Menu model\nclass Menu(SharedModel):\n    name = models.CharField(max_length=100)\n    price = models.DecimalField(\n        max_digits=5,\n        decimal_places=2,",
+        "peekOfCode": "class Category(SharedModel):\n    name = models.CharField(max_length=50)\n    def __str__(self):\n        return self.name\n# Menu model\nclass Menu(SharedModel):\n    name = models.CharField(max_length=100)\n    price = models.DecimalField(\n        max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)]\n    )",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -693,7 +628,16 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Menu(SharedModel):\n    name = models.CharField(max_length=100)\n    price = models.DecimalField(\n        max_digits=5,\n        decimal_places=2,\n        validators=[MinValueValidator(0.01)],  # Ensures the price is positive\n    )\n    category = models.ForeignKey(Category, on_delete=models.CASCADE)\n    def __str__(self):\n        return self.name",
+        "peekOfCode": "class Menu(SharedModel):\n    name = models.CharField(max_length=100)\n    price = models.DecimalField(\n        max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)]\n    )\n    category = models.ForeignKey(\"Category\", on_delete=models.CASCADE)\n    def __str__(self):\n        return self.name\n# MenuItem model\nclass MenuItem(SharedModel):",
+        "detail": "restaurant.models",
+        "documentation": {}
+    },
+    {
+        "label": "MenuItem",
+        "kind": 6,
+        "importPath": "restaurant.models",
+        "description": "restaurant.models",
+        "peekOfCode": "class MenuItem(SharedModel):\n    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name=\"menu_items\")\n    name = models.CharField(max_length=100)\n    price = models.DecimalField(\n        max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)]\n    )\n    def __str__(self):\n        return self.name\n# Waiter model\nclass Waiter(SharedModel):",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -702,7 +646,7 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Waiter(SharedModel):\n    name = models.CharField(max_length=100)\n    age = models.IntegerField(\n        validators=[MinValueValidator(1)]  # Ensures age is positive\n    )\n    def __str__(self):\n        return self.name\n# Reception model\nclass Reception(SharedModel):\n    name = models.CharField(max_length=100)",
+        "peekOfCode": "class Waiter(SharedModel):\n    name = models.CharField(max_length=100)\n    age = models.IntegerField(\n        validators=[MinValueValidator(1)]\n    )  # Ensures age is positive\n    def __str__(self):\n        return self.name\n# Reception model\nclass Reception(SharedModel):\n    name = models.CharField(max_length=100)",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -711,7 +655,7 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Reception(SharedModel):\n    name = models.CharField(max_length=100)\n    contact_number = models.CharField(max_length=15)\n    def __str__(self):\n        return self.name\n# Order model\nclass Order(SharedModel):\n    table = models.ForeignKey(Table, on_delete=models.CASCADE)\n    menu_items = models.ManyToManyField(\"Menu\")\n    waiter = models.ForeignKey(\"Waiter\", on_delete=models.CASCADE)",
+        "peekOfCode": "class Reception(SharedModel):\n    name = models.CharField(max_length=100)\n    contact_number = models.CharField(max_length=15)\n    def __str__(self):\n        return self.name\n# Order model\nclass Order(SharedModel):\n    table = models.ForeignKey(Table, on_delete=models.CASCADE)\n    menu_items = models.ManyToManyField(MenuItem, related_name=\"orders\")\n    waiter = models.ForeignKey(Waiter, on_delete=models.CASCADE)",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -720,7 +664,7 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Order(SharedModel):\n    table = models.ForeignKey(Table, on_delete=models.CASCADE)\n    menu_items = models.ManyToManyField(\"Menu\")\n    waiter = models.ForeignKey(\"Waiter\", on_delete=models.CASCADE)\n    def __str__(self):\n        return f\"Order {self.id} at Table {self.table.number}\"\n# Bill model\nclass Bill(SharedModel):\n    order = models.OneToOneField(\"Order\", on_delete=models.CASCADE)\n    total_amount = models.DecimalField(",
+        "peekOfCode": "class Order(SharedModel):\n    table = models.ForeignKey(Table, on_delete=models.CASCADE)\n    menu_items = models.ManyToManyField(MenuItem, related_name=\"orders\")\n    waiter = models.ForeignKey(Waiter, on_delete=models.CASCADE)\n    def __str__(self):\n        return f\"Order {self.id} at Table {self.table.number}\"\n    def calculate_total(self):\n        \"\"\"Calculate the total price of all menu items in this order.\"\"\"\n        total = sum(item.price for item in self.menu_items.all())\n        return total",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -729,7 +673,7 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Bill(SharedModel):\n    order = models.OneToOneField(\"Order\", on_delete=models.CASCADE)\n    total_amount = models.DecimalField(\n        max_digits=10,\n        decimal_places=2,\n        validators=[MinValueValidator(0.01)],  # Ensures the total amount is positive\n    )\n    is_paid = models.BooleanField(default=False)\n    def pay_bill(self):\n        self.is_paid = True",
+        "peekOfCode": "class Bill(SharedModel):\n    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name=\"bill\")\n    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)\n    is_paid = models.BooleanField(default=False)\n    def calculate_total(self):\n        \"\"\"Calculate the total based on the prices of menu items in the related order.\"\"\"\n        if self.order:\n            self.total_amount = self.order.calculate_total()\n            # Save the updated total_amount without triggering another save loop\n            super().save(update_fields=[\"total_amount\"])",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -738,7 +682,16 @@
         "kind": 6,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "class Reservation(SharedModel):\n    table = models.ForeignKey(Table, on_delete=models.CASCADE)\n    customer_name = models.CharField(max_length=100)\n    reservation_time = models.DateTimeField()\n    is_confirmed = models.BooleanField(default=False)\n    def reserve_table(self):\n        self.table.status = \"Reserved\"\n        self.table.save()",
+        "peekOfCode": "class Reservation(SharedModel):\n    table = models.ForeignKey(Table, on_delete=models.CASCADE)\n    customer_name = models.CharField(max_length=100)\n    reservation_time = models.DateTimeField()\n    is_confirmed = models.BooleanField(default=False)\n    def confirm_reservation(self):\n        if not self.is_confirmed:\n            self.is_confirmed = True\n            self.table.status = \"Reserved\"\n            self.table.save()",
+        "detail": "restaurant.models",
+        "documentation": {}
+    },
+    {
+        "label": "create_or_update_bill",
+        "kind": 2,
+        "importPath": "restaurant.models",
+        "description": "restaurant.models",
+        "peekOfCode": "def create_or_update_bill(sender, instance, created, **kwargs):\n    if created:\n        # Create a new Bill when an Order is created\n        Bill.objects.create(order=instance)\n    else:\n        # Update the Bill total when the Order is updated\n        if hasattr(instance, \"bill\"):\n            # Ensure the total is recalculated after transaction is committed\n            transaction.on_commit(lambda: instance.bill.calculate_total())\n# Reservation model",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -747,7 +700,7 @@
         "kind": 5,
         "importPath": "restaurant.models",
         "description": "restaurant.models",
-        "peekOfCode": "User = get_user_model()\n# Assuming User is the model name for Django's built-in User model\n# Create your models here.\n# Abstract base class for shared fields\nclass SharedModel(models.Model):\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    class Meta:\n        abstract = True\n# Table model",
+        "peekOfCode": "User = get_user_model()\n# Create your models here.\n# Abstract base class for shared fields\nclass SharedModel(models.Model):\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    class Meta:\n        abstract = True\n# Table model\nclass Table(SharedModel):",
         "detail": "restaurant.models",
         "documentation": {}
     },
@@ -810,7 +763,7 @@
         "kind": 6,
         "importPath": "restaurant.serializers",
         "description": "restaurant.serializers",
-        "peekOfCode": "class OrderSerializer(serializers.ModelSerializer):\n    table = TableSerializer()\n    menu_items = MenuSerializer(many=True)\n    waiter = WaiterSerializer()\n    class Meta:\n        model = Order\n        fields = [\n            \"id\",\n            \"table\",\n            \"menu_items\",",
+        "peekOfCode": "class OrderSerializer(serializers.ModelSerializer):\n    total_price = serializers.SerializerMethodField()  # Add a method field for total price\n    class Meta:\n        model = Order\n        fields = [\"id\", \"table\", \"menu_items\", \"waiter\", \"total_price\"]  # Add total_price to fields\n    def get_total_price(self, obj):\n        return obj.calculate_total()    \n    def create(self, validated_data):\n        menu_items_data = validated_data.pop(\"menu_items\", [])\n        order = Order.objects.create(**validated_data)",
         "detail": "restaurant.serializers",
         "documentation": {}
     },
@@ -819,7 +772,7 @@
         "kind": 6,
         "importPath": "restaurant.serializers",
         "description": "restaurant.serializers",
-        "peekOfCode": "class BillSerializer(serializers.ModelSerializer):\n    order = OrderSerializer()\n    class Meta:\n        model = Bill\n        fields = [\n            \"id\",\n            \"order\",\n            \"total_amount\",\n            \"is_paid\",\n            \"created_at\",",
+        "peekOfCode": "class BillSerializer(serializers.ModelSerializer):\n    order = OrderSerializer(read_only=True)\n    class Meta:\n        model = Bill\n        fields = [\"id\", \"order\", \"total_amount\", \"is_paid\", \"created_at\", \"updated_at\"]\n    def update(self, instance, validated_data):\n        # Update only the is_paid status; total_amount is handled automatically\n        instance.is_paid = validated_data.get(\"is_paid\", instance.is_paid)\n        instance.save()\n        return instance",
         "detail": "restaurant.serializers",
         "documentation": {}
     },
@@ -909,7 +862,7 @@
         "kind": 6,
         "importPath": "restaurant.views",
         "description": "restaurant.views",
-        "peekOfCode": "class BillViewSet(viewsets.ModelViewSet):\n    queryset = Bill.objects.all()\n    serializer_class = BillSerializer\nclass ReservationViewSet(viewsets.ModelViewSet):\n    queryset = Reservation.objects.all()\n    serializer_class = ReservationSerializer\n    @action(detail=False, methods=[\"get\"], url_path=\"available-tables\")\n    def get_available_tables(self, request):\n        capacity = request.query_params.get(\"capacity\", None)\n        if not capacity:",
+        "peekOfCode": "class BillViewSet(viewsets.ModelViewSet):\n    queryset = Bill.objects.all()\n    serializer_class = BillSerializer\n    def perform_create(self, serializer):\n        # Automatically create a bill when an order is created\n        bill = serializer.save()\n        bill.calculate_total()  # Ensure the total is calculated\n    def perform_update(self, serializer):\n        # Automatically update the bill when an order is updated\n        bill = serializer.save()",
         "detail": "restaurant.views",
         "documentation": {}
     },

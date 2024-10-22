@@ -3,6 +3,7 @@ from .models import (
     Table,
     Category,
     Menu,
+    MenuItem,
     Waiter,
     Reception,
     Order,
@@ -71,14 +72,17 @@ class ReceptionSerializer(serializers.ModelSerializer):
 
 # OrderSerializer with logic to create Bill after Order is created
 class OrderSerializer(serializers.ModelSerializer):
-    menu_items = serializers.PrimaryKeyRelatedField(queryset=Menu.objects.all(), many=True)
+    total_price = serializers.SerializerMethodField()  # Add a method field for total price
 
     class Meta:
         model = Order
-        fields = ["id", "table", "menu_items", "waiter", "created_at", "updated_at"]
+        fields = ["id", "table", "menu_items", "waiter", "total_price"]  # Add total_price to fields
+
+    def get_total_price(self, obj):
+        return obj.calculate_total()    
 
     def create(self, validated_data):
-        menu_items_data = validated_data.pop('menu_items', [])
+        menu_items_data = validated_data.pop("menu_items", [])
         order = Order.objects.create(**validated_data)
 
         # Add menu items to the order
@@ -88,14 +92,14 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
     def update(self, instance, validated_data):
-        menu_items_data = validated_data.pop('menu_items', None)
+        menu_items_data = validated_data.pop("menu_items", None)
 
         # Update the order fields
-        instance.table = validated_data.get('table', instance.table)
-        instance.waiter = validated_data.get('waiter', instance.waiter)
+        instance.table = validated_data.get("table", instance.table)
+        instance.waiter = validated_data.get("waiter", instance.waiter)
         instance.save()
 
-        # Update menu items
+        # Update menu items if provided
         if menu_items_data is not None:
             instance.menu_items.set(menu_items_data)
 
@@ -113,9 +117,10 @@ class BillSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         # Update only the is_paid status; total_amount is handled automatically
-        instance.is_paid = validated_data.get('is_paid', instance.is_paid)
+        instance.is_paid = validated_data.get("is_paid", instance.is_paid)
         instance.save()
         return instance
+
 
 class ReservationSerializer(serializers.ModelSerializer):
     table = serializers.PrimaryKeyRelatedField(queryset=Table.objects.all())

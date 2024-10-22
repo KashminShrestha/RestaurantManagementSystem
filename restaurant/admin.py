@@ -3,6 +3,7 @@ from .models import (
     Table,
     Category,
     Menu,
+    MenuItem,
     Waiter,
     Reception,
     Order,
@@ -35,6 +36,20 @@ class MenuAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 
+@admin.register(MenuItem)
+class MenuItemAdmin(admin.ModelAdmin):
+    list_display = ["name", "price", "get_category"]
+    list_filter = ["menu__category"]
+    search_fields = ["name", "menu__category__name"]
+    autocomplete_fields = ["menu"]
+    list_per_page = 20
+
+    def get_category(self, obj):
+        return obj.menu.category.name
+    get_category.short_description = "Category"  # Changed from "Name" to "Category"
+
+
+
 @admin.register(Waiter)
 class WaiterAdmin(admin.ModelAdmin):
     list_display = ["name", "age"]
@@ -49,11 +64,17 @@ class ReceptionAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ["table", "waiter"]
+    list_display = ["table", "waiter", "total_price"]  # Add total_price here
     list_filter = ["waiter"]
     search_fields = ["table__number", "waiter__name"]
     filter_horizontal = ("menu_items",)  # Allows for multi-select in admin
     list_per_page = 20
+
+    # This method will call calculate_total and show it in the admin interface
+    def total_price(self, obj):
+        return obj.calculate_total()  # Call the Order model's method
+
+    total_price.short_description = "Total Price"
 
 @admin.register(Bill)
 class BillAdmin(admin.ModelAdmin):
