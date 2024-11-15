@@ -46,6 +46,18 @@ class MenuSerializer(serializers.ModelSerializer):
         ]
 
 
+class MenuItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuItem
+        fields = [
+            "id",
+            "name",
+            "price",
+            "created_at",
+            "updated_at",
+        ]
+
+
 class WaiterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waiter
@@ -72,14 +84,22 @@ class ReceptionSerializer(serializers.ModelSerializer):
 
 # OrderSerializer with logic to create Bill after Order is created
 class OrderSerializer(serializers.ModelSerializer):
-    total_price = serializers.SerializerMethodField()  # Add a method field for total price
+    total_price = (
+        serializers.SerializerMethodField()
+    )  # Add a method field for total price
 
     class Meta:
         model = Order
-        fields = ["id", "table", "menu_items", "waiter", "total_price"]  # Add total_price to fields
+        fields = [
+            "id",
+            "table",
+            "menu_items",
+            "waiter",
+            "total_price",
+        ]  # Add total_price to fields
 
     def get_total_price(self, obj):
-        return obj.calculate_total()    
+        return obj.calculate_total()
 
     def create(self, validated_data):
         menu_items_data = validated_data.pop("menu_items", [])

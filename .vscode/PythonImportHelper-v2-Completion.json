@@ -717,6 +717,15 @@
         "documentation": {}
     },
     {
+        "label": "MenuItemSerializer",
+        "kind": 6,
+        "importPath": "restaurant.serializers",
+        "description": "restaurant.serializers",
+        "peekOfCode": "class MenuItemSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = MenuItem\n        fields = [\n            \"id\",\n            \"name\",\n            \"price\",\n            \"created_at\",\n            \"updated_at\",\n        ]",
+        "detail": "restaurant.serializers",
+        "documentation": {}
+    },
+    {
         "label": "WaiterSerializer",
         "kind": 6,
         "importPath": "restaurant.serializers",
@@ -739,7 +748,7 @@
         "kind": 6,
         "importPath": "restaurant.serializers",
         "description": "restaurant.serializers",
-        "peekOfCode": "class OrderSerializer(serializers.ModelSerializer):\n    total_price = serializers.SerializerMethodField()  # Add a method field for total price\n    class Meta:\n        model = Order\n        fields = [\"id\", \"table\", \"menu_items\", \"waiter\", \"total_price\"]  # Add total_price to fields\n    def get_total_price(self, obj):\n        return obj.calculate_total()    \n    def create(self, validated_data):\n        menu_items_data = validated_data.pop(\"menu_items\", [])\n        order = Order.objects.create(**validated_data)",
+        "peekOfCode": "class OrderSerializer(serializers.ModelSerializer):\n    total_price = (\n        serializers.SerializerMethodField()\n    )  # Add a method field for total price\n    class Meta:\n        model = Order\n        fields = [\n            \"id\",\n            \"table\",\n            \"menu_items\",",
         "detail": "restaurant.serializers",
         "documentation": {}
     },
@@ -766,7 +775,7 @@
         "kind": 5,
         "importPath": "restaurant.urls",
         "description": "restaurant.urls",
-        "peekOfCode": "router = DefaultRouter()\nrouter.register(r\"Tables\", TableViewSet)\nrouter.register(r\"Categories\", CategoryViewSet)\nrouter.register(r\"Menus\", MenuViewSet)\nrouter.register(r\"Waiters\", WaiterViewSet)\nrouter.register(r\"Receptions\", ReceptionViewSet)\nrouter.register(r\"Orders\", OrderViewSet)\nrouter.register(r\"Bills\", BillViewSet)\nrouter.register(r\"Reservations\", ReservationViewSet)\n# urlpatterns = [",
+        "peekOfCode": "router = DefaultRouter()\nrouter.register(r\"Tables\", TableViewSet)\nrouter.register(r\"Categories\", CategoryViewSet)\nrouter.register(r\"Menus\", MenuViewSet)\nrouter.register(r\"MenuItems\", MenuItemViewSet)\nrouter.register(r\"Waiters\", WaiterViewSet)\nrouter.register(r\"Receptions\", ReceptionViewSet)\nrouter.register(r\"Orders\", OrderViewSet)\nrouter.register(r\"Bills\", BillViewSet)\nrouter.register(r\"Reservations\", ReservationViewSet)",
         "detail": "restaurant.urls",
         "documentation": {}
     },
@@ -784,7 +793,7 @@
         "kind": 6,
         "importPath": "restaurant.views",
         "description": "restaurant.views",
-        "peekOfCode": "class TableViewSet(viewsets.ModelViewSet):\n    queryset = Table.objects.all()\n    serializer_class = TableSerializer\nclass CategoryViewSet(viewsets.ModelViewSet):\n    queryset = Category.objects.all()\n    serializer_class = CategorySerializer\nclass MenuViewSet(viewsets.ModelViewSet):\n    queryset = Menu.objects.select_related(\"category\").all()\n    serializer_class = MenuSerializer\nclass WaiterViewSet(viewsets.ModelViewSet):",
+        "peekOfCode": "class TableViewSet(viewsets.ModelViewSet):\n    queryset = Table.objects.all()\n    serializer_class = TableSerializer\nclass CategoryViewSet(viewsets.ModelViewSet):\n    queryset = Category.objects.all()\n    serializer_class = CategorySerializer\nclass MenuViewSet(viewsets.ModelViewSet):\n    queryset = Menu.objects.select_related(\"category\").all()\n    serializer_class = MenuSerializer\nclass MenuItemViewSet(viewsets.ModelViewSet):",
         "detail": "restaurant.views",
         "documentation": {}
     },
@@ -793,7 +802,7 @@
         "kind": 6,
         "importPath": "restaurant.views",
         "description": "restaurant.views",
-        "peekOfCode": "class CategoryViewSet(viewsets.ModelViewSet):\n    queryset = Category.objects.all()\n    serializer_class = CategorySerializer\nclass MenuViewSet(viewsets.ModelViewSet):\n    queryset = Menu.objects.select_related(\"category\").all()\n    serializer_class = MenuSerializer\nclass WaiterViewSet(viewsets.ModelViewSet):\n    queryset = Waiter.objects.all()\n    serializer_class = WaiterSerializer\nclass ReceptionViewSet(viewsets.ModelViewSet):",
+        "peekOfCode": "class CategoryViewSet(viewsets.ModelViewSet):\n    queryset = Category.objects.all()\n    serializer_class = CategorySerializer\nclass MenuViewSet(viewsets.ModelViewSet):\n    queryset = Menu.objects.select_related(\"category\").all()\n    serializer_class = MenuSerializer\nclass MenuItemViewSet(viewsets.ModelViewSet):\n    queryset = MenuItem.objects.all()\n    serializer_class = MenuItemSerializer\nclass WaiterViewSet(viewsets.ModelViewSet):",
         "detail": "restaurant.views",
         "documentation": {}
     },
@@ -802,7 +811,16 @@
         "kind": 6,
         "importPath": "restaurant.views",
         "description": "restaurant.views",
-        "peekOfCode": "class MenuViewSet(viewsets.ModelViewSet):\n    queryset = Menu.objects.select_related(\"category\").all()\n    serializer_class = MenuSerializer\nclass WaiterViewSet(viewsets.ModelViewSet):\n    queryset = Waiter.objects.all()\n    serializer_class = WaiterSerializer\nclass ReceptionViewSet(viewsets.ModelViewSet):\n    queryset = Reception.objects.all()\n    serializer_class = ReceptionSerializer\nclass OrderViewSet(viewsets.ModelViewSet):",
+        "peekOfCode": "class MenuViewSet(viewsets.ModelViewSet):\n    queryset = Menu.objects.select_related(\"category\").all()\n    serializer_class = MenuSerializer\nclass MenuItemViewSet(viewsets.ModelViewSet):\n    queryset = MenuItem.objects.all()\n    serializer_class = MenuItemSerializer\nclass WaiterViewSet(viewsets.ModelViewSet):\n    queryset = Waiter.objects.all()\n    serializer_class = WaiterSerializer\nclass ReceptionViewSet(viewsets.ModelViewSet):",
+        "detail": "restaurant.views",
+        "documentation": {}
+    },
+    {
+        "label": "MenuItemViewSet",
+        "kind": 6,
+        "importPath": "restaurant.views",
+        "description": "restaurant.views",
+        "peekOfCode": "class MenuItemViewSet(viewsets.ModelViewSet):\n    queryset = MenuItem.objects.all()\n    serializer_class = MenuItemSerializer\nclass WaiterViewSet(viewsets.ModelViewSet):\n    queryset = Waiter.objects.all()\n    serializer_class = WaiterSerializer\nclass ReceptionViewSet(viewsets.ModelViewSet):\n    queryset = Reception.objects.all()\n    serializer_class = ReceptionSerializer\nclass OrderViewSet(viewsets.ModelViewSet):",
         "detail": "restaurant.views",
         "documentation": {}
     },

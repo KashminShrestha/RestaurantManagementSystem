@@ -4,24 +4,26 @@ from rest_framework.response import Response
 from django_filters import rest_framework as filters
 from rest_framework.filters import SearchFilter
 from .models import (
-    Table,
+    Bill,
     Category,
     Menu,
-    Waiter,
-    Reception,
+    MenuItem,
     Order,
-    Bill,
+    Reception,
     Reservation,
+    Table,
+    Waiter,
 )
 from .serializers import (
-    TableSerializer,
-    CategorySerializer,
-    MenuSerializer,
-    WaiterSerializer,
-    ReceptionSerializer,
-    OrderSerializer,
     BillSerializer,
+    CategorySerializer,
+    MenuItemSerializer,
+    MenuSerializer,
+    OrderSerializer,
+    ReceptionSerializer,
     ReservationSerializer,
+    TableSerializer,
+    WaiterSerializer,
 )
 
 
@@ -38,6 +40,11 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class MenuViewSet(viewsets.ModelViewSet):
     queryset = Menu.objects.select_related("category").all()
     serializer_class = MenuSerializer
+
+
+class MenuItemViewSet(viewsets.ModelViewSet):
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
 
 
 class WaiterViewSet(viewsets.ModelViewSet):

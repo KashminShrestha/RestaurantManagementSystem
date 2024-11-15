@@ -18,20 +18,22 @@ Including another URLconf
 # from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
-    TableViewSet,
-    CategoryViewSet,
-    MenuViewSet,
-    WaiterViewSet,
-    ReceptionViewSet,
-    OrderViewSet,
     BillViewSet,
+    CategoryViewSet,
+    MenuItemViewSet,
+    MenuViewSet,
+    OrderViewSet,
+    ReceptionViewSet,
     ReservationViewSet,
+    TableViewSet,
+    WaiterViewSet,
 )
 
 router = DefaultRouter()
 router.register(r"Tables", TableViewSet)
 router.register(r"Categories", CategoryViewSet)
 router.register(r"Menus", MenuViewSet)
+router.register(r"MenuItems", MenuItemViewSet)
 router.register(r"Waiters", WaiterViewSet)
 router.register(r"Receptions", ReceptionViewSet)
 router.register(r"Orders", OrderViewSet)

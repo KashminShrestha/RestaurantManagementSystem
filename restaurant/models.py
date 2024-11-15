@@ -105,7 +105,7 @@ class Order(SharedModel):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         # Ensure Bill total is updated after all menu_items are added
-        if hasattr(self, 'bill'):
+        if hasattr(self, "bill"):
             transaction.on_commit(lambda: self.bill.calculate_total())
 
 
