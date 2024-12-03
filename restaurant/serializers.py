@@ -133,7 +133,14 @@ class BillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bill
-        fields = ["id", "order", "total_amount", "is_paid", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "order",
+            "total_amount",
+            "is_paid",
+            "created_at",
+            "updated_at",
+        ]
 
     def update(self, instance, validated_data):
         # Update only the is_paid status; total_amount is handled automatically
